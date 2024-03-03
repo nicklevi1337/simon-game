@@ -1,8 +1,57 @@
 <template>
-  <button :class="buttonClasses" @click="handleClick" ref="button" />
+  <button :class="buttonClasses" @click="handleClick" ref="button"></button>
 </template>
 
 <script>
+ export default {
+  name: "SimonButton",
+  props: {
+    idx: {
+      type: Number,
+      required: true
+    },
+    color: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+  },
+
+  data: () => ({
+    sound: null,
+  }),
+
+  created(){
+    const path = require(`../assets/sounds/${this.name}`);
+    this.sound = new Audio(path)
+  },
+
+  computed: {
+    buttonClasses(){
+      return ["simon-button", this.color];
+    },
+  },
+
+  methods:{
+    play() {
+      this.sound.play();
+      
+      this.$refs.button.classList.add("active");
+            setTimeout(() => {
+              this.$refs.button.classList.remove("active");
+            }, 400);
+    },
+
+    handleClick(){
+      this.play();
+      this.$emit("click", this.idx);
+    }
+  }
+
+ }
 
 </script>
 
