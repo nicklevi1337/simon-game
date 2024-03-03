@@ -37,7 +37,7 @@
               type="radio"
               class="difficulty__input"
             />
-            <label :for="`difficulty-${item.value}`">{{ item.text }}></label>
+            <label :for="`difficulty-${item.value}`">{{ item.text }}</label>
           </li>
         </ul>
       </div>
